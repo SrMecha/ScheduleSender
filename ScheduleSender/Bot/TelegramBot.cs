@@ -66,5 +66,6 @@ public static class TelegramBot
         );
         StartScheduleSend();
         Console.ReadLine();
+        Console.WriteLine("Программа остановлена");
     }
 }
