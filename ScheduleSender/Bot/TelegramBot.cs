@@ -48,7 +48,7 @@ public static class TelegramBot
                 );
     }
 
-    public static void Start()
+    public static async Task Start()
     {
         Console.WriteLine($"{Client.GetMeAsync().Result.FirstName} запущен.");
 

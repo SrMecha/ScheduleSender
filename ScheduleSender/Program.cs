@@ -6,5 +6,5 @@ namespace ScheduleSender;
 
 public static class Program
 {
-    public static void Main() => TelegramBot.Start();
+    public static void Main() => TelegramBot.Start().GetAwaiter().GetResult();
 }
