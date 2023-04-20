@@ -10,7 +10,7 @@ public static class ImageCreator
 #if DEBUG
     private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../../../Images"));
 #else
-    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../Images"));
+    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"/Images"));
 #endif
     private static readonly SKPaint _paint = new()
     { 
