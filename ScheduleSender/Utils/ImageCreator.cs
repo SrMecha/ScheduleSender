@@ -12,7 +12,7 @@ public static class ImageCreator
     {
         TextSize = 45,
         Color = SKColor.Parse("#000000"),
-        Typeface = SKTypeface.FromFile("../../Fonts/AnimeAce.ttf")
+        Typeface = SKTypeface.FromFile(Path.GetFullPath("../../Fonts/TimesNewRomanRegular.ttf", AppDomain.CurrentDomain.BaseDirectory))
     };
 
     public static SKBitmap Create(GroupSchedule schedule)
