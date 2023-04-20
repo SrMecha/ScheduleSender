@@ -10,7 +10,6 @@ public static class Program
 
     public static async Task MainAsync()
     {
-        Console.WriteLine(Path.GetFullPath("../../../"));
         await TelegramBot.Start();
     }
 }
