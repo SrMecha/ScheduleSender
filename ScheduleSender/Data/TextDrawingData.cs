@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using SkiaSharp;
 
 namespace ScheduleSender.Data;
 
@@ -9,8 +9,8 @@ public class TextDrawingData
     public int Width { get; init; }
     public int Height { get; init; }
 
-    public RectangleF ToRectangle()
+    public SKRect ToRectangle()
     {
-        return new RectangleF(X, Y, Width, Height);
+        return new SKRect(X, Y, X + Width, Y + Height);
     }
 }

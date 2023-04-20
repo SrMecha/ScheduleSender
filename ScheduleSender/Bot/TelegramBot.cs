@@ -26,6 +26,7 @@ public static class TelegramBot
     public static async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
     {
         Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(exception));
+        throw exception;
     }
 
     public static void StartScheduleSend()
