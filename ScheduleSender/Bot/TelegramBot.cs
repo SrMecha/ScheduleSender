@@ -4,6 +4,7 @@ using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.InputFiles;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace ScheduleSender.Bot;
 
@@ -36,16 +37,23 @@ public static class TelegramBot
 
             while (await timer.WaitForNextTickAsync())
             {
-                await SendSchedule();
+                if (await ScheduleLoader.IsNewSchedulePosted())
+                    await SendSchedule();
             }
         });
     }
 
     public static async Task SendSchedule()
     {
+        var schedule = await ScheduleLoader.GetSchedule();
+        var button = new InlineKeyboardMarkup(InlineKeyboardButton.WithUrl(
+            $"Расписание на {schedule.Date}", 
+            schedule.URL
+            ));
         await Client.SendPhotoAsync(
                 ChannelId,
-                new InputOnlineFile(ImageCreator.Create(await ScheduleLoader.GetSchedule()).ToStream())
+                new InputOnlineFile(ImageCreator.Create(schedule).ToStream()),
+                replyMarkup: button
                 );
     }
 

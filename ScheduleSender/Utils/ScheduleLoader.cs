@@ -13,10 +13,7 @@ public static class ScheduleLoader
         {
             var schedule = WebExcelReader.FindGroup(await SiteParser.OpenSiteAsync(url), "СБ-130");
             if (schedule is not null)
-            {
-                _lastSchedule = schedule;
                 groupSchedule = schedule;
-            }
         }
         return groupSchedule ?? new GroupSchedule(new());
     }
@@ -28,7 +25,8 @@ public static class ScheduleLoader
 
     public static async Task<GroupSchedule> GetSchedule()
     {
-        _lastSchedule ??= await LoadSchedule();
+        if (_lastSchedule is null || await IsNewSchedulePosted())
+            _lastSchedule = await LoadSchedule();
         return _lastSchedule;
     }
 

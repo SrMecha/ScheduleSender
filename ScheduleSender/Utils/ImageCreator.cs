@@ -7,12 +7,12 @@ namespace ScheduleSender.Utils;
 
 public static class ImageCreator
 {
-    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../Images", AppDomain.CurrentDomain.BaseDirectory));
+    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../../../Images", AppDomain.CurrentDomain.BaseDirectory));
     private static readonly SKPaint _paint = new()
     {
         TextSize = 45,
         Color = SKColor.Parse("#000000"),
-        Typeface = SKTypeface.FromFile(Path.GetFullPath("../../Fonts/TimesNewRomanRegular.ttf", AppDomain.CurrentDomain.BaseDirectory))
+        Typeface = SKTypeface.FromFile(Path.GetFullPath("../../../../Fonts/TimesNewRomanRegular.ttf", AppDomain.CurrentDomain.BaseDirectory))
     };
 
     public static SKBitmap Create(GroupSchedule schedule)
