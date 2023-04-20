@@ -11,7 +11,8 @@ public static class ImageCreator
     private static readonly SKPaint _paint = new()
     { 
         TextSize = 45,
-        Color = SKColor.Parse("#000000")
+        Color = SKColor.Parse("#000000"),
+        Typeface = SKTypeface.FromFamilyName("Karla")
     };
 
     public static SKBitmap Create(GroupSchedule schedule)
