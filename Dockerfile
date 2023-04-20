@@ -1,5 +1,5 @@
 ﻿FROM mcr.microsoft.com/dotnet/runtime:6.0 AS base
-COPY ["Geno/bin/Images", "root/.net/Images"]
+COPY ["ScheduleSender/bin/Images", "root/.net/Images"]
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
