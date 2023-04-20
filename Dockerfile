@@ -8,7 +8,7 @@ COPY ["ScheduleSender/ScheduleSender.csproj", "ScheduleSender/"]
 RUN dotnet restore "ScheduleSender/ScheduleSender.csproj"
 COPY . .
 WORKDIR "/src/ScheduleSender"
-RUN dotnet build "Geno.csproj" -c Release -o /app/build
+RUN dotnet build "ScheduleSender.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "ScheduleSender.csproj" --os linux --arch x64 --sc -c Release -o /app/publish
