@@ -1,6 +1,5 @@
 ﻿using SkiaSharp;
 using System.Text.RegularExpressions;
-using System;
 
 namespace ScheduleSender.Extensions;
 

@@ -62,7 +62,8 @@ public static class WebExcelReader
             else
             {
                 isLessonsStarted = true;
-                result.Lessons.Add(new LessonData() {
+                result.Lessons.Add(new LessonData()
+                {
                     Name = lessonName,
                     Office = scheduleElements.GetElementsByTagName("tr")[row].GetElementsByTagName("td")[column + 1].TextContent
                 });

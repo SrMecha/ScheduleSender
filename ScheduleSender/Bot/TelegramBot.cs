@@ -18,7 +18,7 @@ public static class TelegramBot
         if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
         {
             await botClient.SendPhotoAsync(
-                update.Message!.Chat, 
+                update.Message!.Chat,
                 new InputOnlineFile(ImageCreator.Create(await ScheduleLoader.GetSchedule()).ToStream())
                 );
         }
@@ -32,7 +32,8 @@ public static class TelegramBot
 
     public static void StartScheduleSend()
     {
-        _ = Task.Run(async () => {
+        _ = Task.Run(async () =>
+        {
             var timer = new PeriodicTimer(TimeSpan.FromMinutes(5));
 
             while (await timer.WaitForNextTickAsync())
@@ -47,7 +48,7 @@ public static class TelegramBot
     {
         var schedule = await ScheduleLoader.GetSchedule();
         var button = new InlineKeyboardMarkup(InlineKeyboardButton.WithUrl(
-            $"Расписание на {schedule.Date}", 
+            $"Расписание на {schedule.Date}",
             schedule.URL
             ));
         await Client.SendPhotoAsync(

@@ -21,7 +21,7 @@ public static class ScheduleLoader
     public static async Task<bool> IsNewSchedulePosted()
     {
         return _lastSchedule is null || !SiteParser.ParseScheduleURLs(await SiteParser.OpenSiteAsync()).Contains(_lastSchedule.URL);
-    } 
+    }
 
     public static async Task<GroupSchedule> GetSchedule()
     {

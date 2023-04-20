@@ -1,6 +1,4 @@
 ﻿using ScheduleSender.Bot;
-using ScheduleSender.Types;
-using ScheduleSender.Utils;
 
 namespace ScheduleSender;
 

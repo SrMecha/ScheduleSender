@@ -36,12 +36,12 @@ public static class ImageCreator
         {
             for (int i = 0; i < schedule.Lessons.Count; i++)
             {
-            canvas.DrawTextInBox(schedule.Lessons[i].Name,
-                config.Lessons[i].Name.ToRectangle(),
-                _paint);
-            canvas.DrawTextInBox(schedule.Lessons[i].Office,
-                config.Lessons[i].Office.ToRectangle(),
-                _paint);
+                canvas.DrawTextInBox(schedule.Lessons[i].Name,
+                    config.Lessons[i].Name.ToRectangle(),
+                    _paint);
+                canvas.DrawTextInBox(schedule.Lessons[i].Office,
+                    config.Lessons[i].Office.ToRectangle(),
+                    _paint);
             }
         }
     }
