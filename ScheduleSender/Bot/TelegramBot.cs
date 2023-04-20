@@ -33,7 +33,7 @@ public static class TelegramBot
     public static void StartScheduleSend()
     {
         _ = Task.Run(async () => {
-            var timer = new PeriodicTimer(TimeSpan.FromSeconds(10));
+            var timer = new PeriodicTimer(TimeSpan.FromMinutes(5));
 
             while (await timer.WaitForNextTickAsync())
             {
