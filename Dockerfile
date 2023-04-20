@@ -1,8 +1,8 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime:6.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/runtime:7.0 AS base
 COPY ["ScheduleSender/Images", "root/.net/Images"]
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["ScheduleSender/ScheduleSender.csproj", "ScheduleSender/"]
 RUN dotnet restore "ScheduleSender/ScheduleSender.csproj"
