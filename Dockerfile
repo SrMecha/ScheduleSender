@@ -1,5 +1,5 @@
 ﻿FROM mcr.microsoft.com/dotnet/runtime:7.0 AS base
-COPY ["ScheduleSender/Images", "src/ScheduleSender/Images"]
+COPY ["ScheduleSender/Images", "root/.net/Images"]
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
@@ -11,7 +11,7 @@ WORKDIR "/src/ScheduleSender"
 RUN dotnet build "ScheduleSender.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ScheduleSender.csproj" -o /app/publish
+RUN dotnet publish "ScheduleSender.csproj" --os linux --arch x64 -o /app/publish
 
 FROM base AS final
 WORKDIR /app

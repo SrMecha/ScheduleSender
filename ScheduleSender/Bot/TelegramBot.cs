@@ -51,12 +51,7 @@ public static class TelegramBot
 
     public static async Task Start()
     {
-#if DEBUG
-        Console.WriteLine($"{Client.GetMeAsync().Result.FirstName} запущен дэбаг.");
-#else
-    
-    Console.WriteLine($"{Client.GetMeAsync().Result.FirstName} запущен.");
-#endif
+        Console.WriteLine($"{Client.GetMeAsync().Result.FirstName} запущен.");
 
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;

@@ -7,11 +7,7 @@ namespace ScheduleSender.Utils;
 
 public static class ImageCreator
 {
-#if DEBUG
-    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../../../Images", AppDomain.CurrentDomain.BaseDirectory));
-#else
-    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"/Images", AppDomain.CurrentDomain.BaseDirectory));
-#endif
+    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../../Images", AppDomain.CurrentDomain.BaseDirectory));
     private static readonly SKPaint _paint = new()
     { 
         TextSize = 45,
