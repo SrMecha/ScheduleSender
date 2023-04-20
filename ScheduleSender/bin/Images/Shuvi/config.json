@@ -1,0 +1,94 @@
+{
+  "Date": {
+    "X": 833,
+    "Y": 93,
+    "Width": 161,
+    "Height": 93
+  },
+  "Lessons": [
+    {
+      "Name": {
+        "X": 122,
+        "Y": 158,
+        "Width": 538,
+        "Height": 141
+      },
+      "Office": {
+        "X": 655,
+        "Y": 164,
+        "Width": 82,
+        "Height": 132
+      }
+    },
+    {
+      "Name": {
+        "X": 125,
+        "Y": 291,
+        "Width": 533,
+        "Height": 133
+      },
+      "Office": {
+        "X": 655,
+        "Y": 287,
+        "Width": 83,
+        "Height": 133
+      }
+    },
+    {
+      "Name": {
+        "X": 130,
+        "Y": 426,
+        "Width": 533,
+        "Height": 133
+      },
+      "Office": {
+        "X": 655,
+        "Y": 423,
+        "Width": 83,
+        "Height": 133
+      }
+    },
+    {
+      "Name": {
+        "X": 130,
+        "Y": 555,
+        "Width": 533,
+        "Height": 133
+      },
+      "Office": {
+        "X": 655,
+        "Y": 557,
+        "Width": 83,
+        "Height": 133
+      }
+    },
+    {
+      "Name": {
+        "X": 130,
+        "Y": 686,
+        "Width": 533,
+        "Height": 133
+      },
+      "Office": {
+        "X": 655,
+        "Y": 687,
+        "Width": 83,
+        "Height": 133
+      }
+    },
+    {
+      "Name": {
+        "X": 130,
+        "Y": 816,
+        "Width": 533,
+        "Height": 133
+      },
+      "Office": {
+        "X": 655,
+        "Y": 816,
+        "Width": 83,
+        "Height": 133
+      }
+    }
+  ]
+}
