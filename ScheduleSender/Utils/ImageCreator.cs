@@ -9,10 +9,10 @@ public static class ImageCreator
 {
     private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../Images", AppDomain.CurrentDomain.BaseDirectory));
     private static readonly SKPaint _paint = new()
-    { 
+    {
         TextSize = 45,
         Color = SKColor.Parse("#000000"),
-        Typeface = SKTypeface.FromFamilyName("Karla")
+        Typeface = SKTypeface.FromFile("../../Fonts/AnimeAce.ttf")
     };
 
     public static SKBitmap Create(GroupSchedule schedule)
