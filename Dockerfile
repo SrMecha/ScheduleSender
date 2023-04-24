@@ -1,6 +1,6 @@
 ﻿FROM mcr.microsoft.com/dotnet/runtime:7.0 AS base
-COPY ["ScheduleSender/Images", "root/.net/Images"]
-COPY ["ScheduleSender/Fonts", "root/.net/Fonts"]
+COPY ["ScheduleSender/bin/Images", "root/.net/Images"]
+COPY ["ScheduleSender/bin/Fonts", "root/.net/Fonts"]
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build

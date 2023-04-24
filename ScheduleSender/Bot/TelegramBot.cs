@@ -76,7 +76,6 @@ public static class TelegramBot
             cancellationToken
         );
         StartScheduleSend();
-        Console.ReadLine();
         await Task.Delay(Timeout.Infinite);
     }
 }

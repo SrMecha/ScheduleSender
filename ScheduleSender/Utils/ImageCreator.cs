@@ -7,12 +7,20 @@ namespace ScheduleSender.Utils;
 
 public static class ImageCreator
 {
+#if DEBUG
+    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../../Images", AppDomain.CurrentDomain.BaseDirectory));
+#else
     private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../Images", AppDomain.CurrentDomain.BaseDirectory));
+#endif
     private static readonly SKPaint _paint = new()
     {
         TextSize = 45,
         Color = SKColor.Parse("#000000"),
+#if DEBUG
+        Typeface = SKTypeface.FromFile(Path.GetFullPath("../../../Fonts/TimesNewRomanRegular.ttf", AppDomain.CurrentDomain.BaseDirectory))
+#else
         Typeface = SKTypeface.FromFile(Path.GetFullPath("../../Fonts/TimesNewRomanRegular.ttf", AppDomain.CurrentDomain.BaseDirectory))
+#endif
     };
 
     public static SKBitmap Create(GroupSchedule schedule)
@@ -42,8 +50,8 @@ public static class ImageCreator
                 canvas.DrawTextInBox(schedule.Lessons[i].Office,
                     config.Lessons[i].Office.ToRectangle(),
                     _paint);
-                canvas.Dispose();
             }
+            canvas.Dispose();
         }
     }
     private static void DrawDate(GroupSchedule schedule, ScheduleDrawingConfig config, SKBitmap bitmap)

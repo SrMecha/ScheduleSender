@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Dom;
 using ScheduleSender.Data;
 using ScheduleSender.Types;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ScheduleSender.Utils;
 
@@ -35,10 +36,11 @@ public static class WebExcelReader
         if (!isFinded)
             return null;
         var isLessonsStarted = false;
+        var date = document.GetElementsByClassName("name")[0].TextContent.Split(":").Last();
         var result = new GroupScheduleData()
         {
-            Name = document.GetElementsByClassName("name")[0].TextContent.Split(":").First(),
-            Date = document.GetElementsByClassName("name")[0].TextContent.Split(":").Last(),
+            Name = $"Расписание на {date}",
+            Date = date,
             URL = document.BaseUri
         };
         column++;
