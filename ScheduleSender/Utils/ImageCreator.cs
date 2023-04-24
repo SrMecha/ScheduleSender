@@ -28,6 +28,7 @@ public static class ImageCreator
         var imageDirectoryPath = GetRandomImagePath();
         var config = ConfigReader.GetConfig($"{imageDirectoryPath}/config.json");
         var bitmap = SKBitmap.Decode($"{imageDirectoryPath}/schedule.png");
+        _paint.TextSize = config.TextSize;
         DrawLessons(schedule, config, bitmap);
         DrawDate(schedule, config, bitmap);
         return bitmap;
@@ -35,7 +36,7 @@ public static class ImageCreator
     public static string GetRandomImagePath()
     {
         return _imagesDirectory
-            .GetDirectories()[new Random().Next(0, _imagesDirectory.GetDirectories().Length - 1)]
+            .GetDirectories()[new Random().Next(0, _imagesDirectory.GetDirectories().Length)]
             .FullName;
     }
     private static void DrawLessons(GroupSchedule schedule, ScheduleDrawingConfig config, SKBitmap bitmap)

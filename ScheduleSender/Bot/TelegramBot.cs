@@ -1,5 +1,6 @@
 ﻿using ScheduleSender.Extensions;
 using ScheduleSender.Utils;
+using System.Reflection;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -17,7 +18,7 @@ public static class TelegramBot
     {
         if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
         {
-            await SendSchedule(update.Message!.Chat);
+            await botClient.SendTextMessageAsync(update.Message!.Chat, $"Бот работает\n{Assembly.GetExecutingAssembly().ImageRuntimeVersion}");
         }
     }
 
