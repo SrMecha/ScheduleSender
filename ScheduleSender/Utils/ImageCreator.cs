@@ -8,7 +8,7 @@ namespace ScheduleSender.Utils;
 public static class ImageCreator
 {
 #if DEBUG
-    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../Images", AppDomain.CurrentDomain.BaseDirectory));
+    private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../../../Images", AppDomain.CurrentDomain.BaseDirectory));
 #else
     private static readonly DirectoryInfo _imagesDirectory = new(Path.GetFullPath($"../../Images", AppDomain.CurrentDomain.BaseDirectory));
 #endif
@@ -17,7 +17,7 @@ public static class ImageCreator
         TextSize = 45,
         Color = SKColor.Parse("#000000"),
 #if DEBUG
-        Typeface = SKTypeface.FromFile(Path.GetFullPath("../../Fonts/TimesNewRomanRegular.ttf", AppDomain.CurrentDomain.BaseDirectory))
+        Typeface = SKTypeface.FromFile(Path.GetFullPath("../../../../Fonts/TimesNewRomanRegular.ttf", AppDomain.CurrentDomain.BaseDirectory))
 #else
         Typeface = SKTypeface.FromFile(Path.GetFullPath("../../Fonts/TimesNewRomanRegular.ttf", AppDomain.CurrentDomain.BaseDirectory))
 #endif

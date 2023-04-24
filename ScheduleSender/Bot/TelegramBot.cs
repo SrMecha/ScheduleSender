@@ -24,7 +24,6 @@ public static class TelegramBot
     public static async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
     {
         Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(exception));
-        throw exception;
     }
 
     public static void StartScheduleSend()
@@ -59,22 +58,25 @@ public static class TelegramBot
         }
     }
 
-    public static async Task Start()
+    public static void StartReceiving()
     {
-        Console.WriteLine($"{Client.GetMeAsync().Result.FirstName} запущен.");
-
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;
         var receiverOptions = new ReceiverOptions
         {
-            AllowedUpdates = { }, // receive all update types
+            AllowedUpdates = { },// receive all update types
         };
         Client.StartReceiving(
             HandleUpdateAsync,
             HandleErrorAsync,
             receiverOptions,
-            cancellationToken
-        );
+            cancellationToken);
+    }
+
+    public static async Task Start()
+    {
+        Console.WriteLine($"{Client.GetMeAsync().Result.FirstName} запущен.");
+        StartReceiving();
         StartScheduleSend();
         await Task.Delay(Timeout.Infinite);
     }
