@@ -42,6 +42,7 @@ public static class ImageCreator
                 canvas.DrawTextInBox(schedule.Lessons[i].Office,
                     config.Lessons[i].Office.ToRectangle(),
                     _paint);
+                canvas.Dispose();
             }
         }
     }
@@ -54,6 +55,7 @@ public static class ImageCreator
             canvas.DrawTextInBox(schedule.Date,
                 config.Date.ToRectangle(),
                 _paint);
+            canvas.Dispose();
         }
     }
 }

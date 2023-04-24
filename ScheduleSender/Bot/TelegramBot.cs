@@ -17,10 +17,7 @@ public static class TelegramBot
     {
         if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
         {
-            await botClient.SendPhotoAsync(
-                update.Message!.Chat,
-                new InputOnlineFile(ImageCreator.Create(await ScheduleLoader.GetSchedule()).ToStream())
-                );
+            await SendSchedule(update.Message!.Chat);
         }
     }
 
@@ -44,7 +41,7 @@ public static class TelegramBot
         });
     }
 
-    public static async Task SendSchedule()
+    public static async Task SendSchedule(ChatId? chatId = null)
     {
         var schedule = await ScheduleLoader.GetSchedule();
         using (var stream = ImageCreator.Create(schedule).ToStream())
@@ -54,7 +51,7 @@ public static class TelegramBot
                 schedule.URL
                 ));
             await Client.SendPhotoAsync(
-                    ChannelId,
+                    chatId ?? ChannelId,
                     new InputOnlineFile(stream),
                     replyMarkup: button
                     );
