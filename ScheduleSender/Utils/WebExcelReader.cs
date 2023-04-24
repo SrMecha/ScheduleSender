@@ -37,6 +37,7 @@ public static class WebExcelReader
         var isLessonsStarted = false;
         var result = new GroupScheduleData()
         {
+            Name = document.GetElementsByClassName("name")[0].TextContent.Split(":").First(),
             Date = document.GetElementsByClassName("name")[0].TextContent.Split(":").Last(),
             URL = document.BaseUri
         };

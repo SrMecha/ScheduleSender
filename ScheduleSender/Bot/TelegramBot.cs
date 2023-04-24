@@ -47,15 +47,19 @@ public static class TelegramBot
     public static async Task SendSchedule()
     {
         var schedule = await ScheduleLoader.GetSchedule();
-        var button = new InlineKeyboardMarkup(InlineKeyboardButton.WithUrl(
-            $"Расписание на {schedule.Date}",
-            schedule.URL
-            ));
-        await Client.SendPhotoAsync(
-                ChannelId,
-                new InputOnlineFile(ImageCreator.Create(schedule).ToStream()),
-                replyMarkup: button
-                );
+        using (var stream = ImageCreator.Create(schedule).ToStream())
+        {
+            var button = new InlineKeyboardMarkup(InlineKeyboardButton.WithUrl(
+                schedule.Name,
+                schedule.URL
+                ));
+            await Client.SendPhotoAsync(
+                    ChannelId,
+                    new InputOnlineFile(stream),
+                    replyMarkup: button
+                    );
+            stream.Close();
+        }
     }
 
     public static async Task Start()

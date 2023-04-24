@@ -4,12 +4,14 @@ namespace ScheduleSender.Types;
 
 public class GroupSchedule
 {
+    public string Name { get; set; }
     public string Date { get; init; }
     public List<Lesson> Lessons { get; init; }
     public string URL { get; init; }
 
     public GroupSchedule(GroupScheduleData data)
     {
+        Name = data.Name;
         Date = data.Date;
         Lessons = ConfigureLessons(data.Lessons);
         URL = data.URL;
