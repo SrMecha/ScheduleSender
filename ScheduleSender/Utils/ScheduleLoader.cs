@@ -5,6 +5,7 @@ namespace ScheduleSender.Utils;
 public static class ScheduleLoader
 {
     private static GroupSchedule? _lastSchedule = null;
+
     public static async Task<GroupSchedule> LoadSchedule()
     {
         var scheduleURLs = SiteParser.ParseScheduleURLs(await SiteParser.OpenSiteAsync());
@@ -20,7 +21,7 @@ public static class ScheduleLoader
 
     public static async Task<bool> IsNewSchedulePosted()
     {
-        return _lastSchedule is null || !SiteParser.ParseScheduleURLs(await SiteParser.OpenSiteAsync()).Contains(_lastSchedule.URL);
+        return _lastSchedule is null || _lastSchedule.Date == (await LoadSchedule()).Date;
     }
 
     public static async Task<GroupSchedule> GetSchedule()
