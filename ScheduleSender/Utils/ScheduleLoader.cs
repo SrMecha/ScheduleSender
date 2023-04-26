@@ -21,7 +21,7 @@ public static class ScheduleLoader
 
     public static async Task<bool> IsNewSchedulePosted()
     {
-        return _lastSchedule is null || _lastSchedule.Date == (await LoadSchedule()).Date;
+        return _lastSchedule is null || _lastSchedule.Date != (await LoadSchedule()).Date;
     }
 
     public static async Task<GroupSchedule> GetSchedule()
