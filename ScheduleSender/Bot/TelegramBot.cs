@@ -1,6 +1,6 @@
 ﻿using ScheduleSender.Extensions;
+using ScheduleSender.Types;
 using ScheduleSender.Utils;
-using System.Reflection;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -13,12 +13,26 @@ public static class TelegramBot
 {
     public static readonly ITelegramBotClient Client = new TelegramBotClient(EnvReader.GetEnviroment("TelegramBotToken")!);
     public static readonly string ChannelId = EnvReader.GetEnviroment("ChannelId")!;
+    private static GroupSchedule? _lastSchedule = null;
+    private static bool _isSchedulePosted = false;
 
     public static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
         if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
         {
-            await botClient.SendTextMessageAsync(update.Message!.Chat, $"Бот работает\n{Assembly.GetExecutingAssembly().ImageRuntimeVersion}");
+            var message = update.Message!;
+            switch (message.Text)
+            {
+                case "ping":
+                    await botClient.SendTextMessageAsync(message.Chat, "Бот работает", cancellationToken: cancellationToken);
+                    break;
+                case "schedule":
+                    await SendSchedule(_lastSchedule ?? new GroupSchedule(), chatId: message.Chat);
+                    break;
+                case "load":
+                    await SendSchedule(await ScheduleLoader.LoadSchedule(), chatId: message.Chat);
+                    break;
+            }
         }
     }
 
@@ -31,19 +45,24 @@ public static class TelegramBot
     {
         _ = Task.Run(async () =>
         {
-            var timer = new PeriodicTimer(TimeSpan.FromMinutes(5));
-
-            while (await timer.WaitForNextTickAsync())
+            while (await new PeriodicTimer(TimeSpan.FromMinutes(5)).WaitForNextTickAsync())
             {
-                if (await ScheduleLoader.IsNewSchedulePosted())
-                    await SendSchedule();
+                if (_lastSchedule is null)
+                {
+                    _lastSchedule = await ScheduleLoader.LoadSchedule();
+                    _isSchedulePosted = false;
+                }
+                if (!_isSchedulePosted)
+                {
+                    await SendSchedule(_lastSchedule);
+                    _isSchedulePosted = true;
+                }
             }
         });
     }
 
-    public static async Task SendSchedule(ChatId? chatId = null)
+    public static async Task SendSchedule(GroupSchedule schedule, ChatId? chatId = null)
     {
-        var schedule = await ScheduleLoader.GetSchedule();
         using (var stream = ImageCreator.Create(schedule).ToStream())
         {
             var button = new InlineKeyboardMarkup(InlineKeyboardButton.WithUrl(

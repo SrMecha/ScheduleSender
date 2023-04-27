@@ -4,31 +4,15 @@ namespace ScheduleSender.Utils;
 
 public static class ScheduleLoader
 {
-    private static GroupSchedule? _lastSchedule = null;
-
     public static async Task<GroupSchedule> LoadSchedule()
     {
         var scheduleURLs = SiteParser.ParseScheduleURLs(await SiteParser.OpenSiteAsync());
-        GroupSchedule? groupSchedule = null;
         foreach (var url in scheduleURLs)
         {
             var schedule = WebExcelReader.FindGroup(await SiteParser.OpenSiteAsync(url), "СБ-130");
             if (schedule is not null)
-                groupSchedule = schedule;
+                return schedule;
         }
-        return groupSchedule ?? new GroupSchedule(new());
+        return new GroupSchedule();
     }
-
-    public static async Task<bool> IsNewSchedulePosted()
-    {
-        return _lastSchedule is null || _lastSchedule.Date != (await LoadSchedule()).Date;
-    }
-
-    public static async Task<GroupSchedule> GetSchedule()
-    {
-        if (_lastSchedule is null || await IsNewSchedulePosted())
-            _lastSchedule = await LoadSchedule();
-        return _lastSchedule;
-    }
-
 }

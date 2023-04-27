@@ -17,6 +17,15 @@ public class GroupSchedule
         URL = data.URL;
     }
 
+    public GroupSchedule()
+    {
+        var data = new GroupScheduleData();
+        Name = data.Name;
+        Date = data.Date;
+        Lessons = ConfigureLessons(data.Lessons);
+        URL = data.URL;
+    }
+
     private List<Lesson> ConfigureLessons(List<LessonData> lessonsData)
     {
         var result = new List<Lesson>();
