@@ -47,15 +47,23 @@ public static class TelegramBot
         {
             while (await new PeriodicTimer(TimeSpan.FromMinutes(5)).WaitForNextTickAsync())
             {
-                if (_lastSchedule is null)
+                try
                 {
-                    _lastSchedule = await ScheduleLoader.LoadSchedule();
-                    _isSchedulePosted = false;
+                    var loadedSchedule = await ScheduleLoader.LoadSchedule();
+                    if (_lastSchedule is null || _lastSchedule.Date != loadedSchedule.Date)
+                    {
+                        _lastSchedule = loadedSchedule;
+                        await SendSchedule(_lastSchedule);
+                        Console.WriteLine($"- - Новое расписание обнаружено {_lastSchedule.Date} == {loadedSchedule.Date} - -");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Новое расписание не обнаружено {_lastSchedule.Date} != {loadedSchedule.Date}");
+                    }
                 }
-                if (!_isSchedulePosted)
+                catch 
                 {
-                    await SendSchedule(_lastSchedule);
-                    _isSchedulePosted = true;
+                    Console.WriteLine("При попытке обработать расписание возникла ошибка.");
                 }
             }
         });
