@@ -10,17 +10,21 @@ public static class SKCanvasExtension
         var wordLines = new List<List<string>>() { new() };
         var spaceWidth = paint.MeasureText(" ");
         var lineWidth = 0f;
-        var fixedText = Regex.Replace(text.Trim(), @"\s+", " ");
-        foreach (var word in fixedText.Split(" "))
+        var fixedText = Regex.Replace(text.Trim(), @"\s+", "\n");
+        foreach (var line in fixedText.Split("\n"))
         {
-            var wordWidth = paint.MeasureText(word);
-            if (wordWidth > rect.Right - rect.Left - lineWidth)
+            foreach (var word in line.Split(" "))
             {
-                wordLines.Add(new());
-                lineWidth = 0;
+                var wordWidth = paint.MeasureText(word);
+                if (wordWidth > rect.Right - rect.Left - lineWidth)
+                {
+                    wordLines.Add(new());
+                    lineWidth = 0;
+                }
+                lineWidth += wordLines[^1].Count < 1 ? wordWidth : wordWidth + spaceWidth;
+                wordLines[^1].Add(word);
             }
-            lineWidth += wordLines[^1].Count < 1 ? wordWidth : wordWidth + spaceWidth;
-            wordLines[^1].Add(word);
+            wordLines.Add(new());
         }
         var lineY = (rect.Bottom - rect.Top - paint.TextSize * wordLines.Count) / 2 + paint.FontSpacing / 2 + rect.Top;
         foreach (var lineWords in wordLines)
