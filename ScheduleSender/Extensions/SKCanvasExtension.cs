@@ -19,8 +19,8 @@ public static class SKCanvasExtension
                 wordLines.Add(new());
                 lineWidth = 0;
             }
+            lineWidth += wordLines[^1].Count < 1 ? wordWidth : wordWidth + spaceWidth;
             wordLines[^1].Add(word);
-            lineWidth += wordWidth + spaceWidth;
         }
         var lineY = (rect.Bottom - rect.Top - paint.TextSize * wordLines.Count) / 2 + paint.FontSpacing / 2 + rect.Top;
         foreach (var lineWords in wordLines)
